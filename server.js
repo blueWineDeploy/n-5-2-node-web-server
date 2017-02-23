@@ -5,6 +5,10 @@ const port = process.env.PORT || 3000;
 
 var app = express();
 
+app.set('view engine', 'hbs');
+
+app.use(express.static(__dirname + '/public'));
+
 hbs.registerPartials(__dirname + '/views/partials');
 
 app.use((req, res, next) => {
@@ -26,12 +30,10 @@ app.use((req, res, next) => {
 });
 */
 
-app.use(express.static(__dirname + '/public'));
 
-app.set('view engine', 'hbs');
 
 hbs.registerHelper('getCurrentYear', () => {
-  return new Date().getFullYear()
+  return new Date().getFullYear();
 });
 
 hbs.registerHelper('screamIt', (text) => {
@@ -61,7 +63,7 @@ app.get('/about', (req, res) => {
     //res.send('About Page');
     res.render('about.hbs', {
         pageTitle: 'About Page'
-        //currentYear: new Date();
+        //currentYear: new Date().getFullYear();
     });
 });
 
